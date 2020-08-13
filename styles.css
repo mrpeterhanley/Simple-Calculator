@@ -189,6 +189,7 @@ body {
 
 .key--zero {
   grid-column: span 2;
+  border-radius: 50%;
 }
 
 .key--firstrow {
