@@ -172,15 +172,18 @@ class Calculator {
   }
 
   calculate(n1, operator, n2) {
+    const firstNum = parseFloat(n1);
+    const secondNum = parseFlot(n2);
+
     switch (operator) {
       case "add":
-        return parseFloat(n1) + parseFloat(n2);
+        return firstNum + secondNum;
       case "subtract":
-        return parseFloat(n1) - parseFloat(n2);
+        return firstNum - secondNum;
       case "multiply":
-        return parseFloat(n1) * parseFloat(n2);
+        return firstNum * secondNum;
       case "divide":
-        return parseFloat(n1) / parseFloat(n2);
+        return firstNum / secondNum;
       default:
         console.log("Calculate failed");
     }
