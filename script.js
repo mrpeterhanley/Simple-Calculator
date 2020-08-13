@@ -173,7 +173,7 @@ class Calculator {
 
   calculate(n1, operator, n2) {
     const firstNum = parseFloat(n1);
-    const secondNum = parseFlot(n2);
+    const secondNum = parseFloat(n2);
 
     switch (operator) {
       case "add":
