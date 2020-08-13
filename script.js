@@ -1,143 +1,192 @@
-// get the calculator element from the DOM
-const calculator = document.querySelector(".calculator");
+class Calculator {
+  constructor() {
+    this.calculator = document.querySelector(".calculator");
+    this.keys = this.calculator.querySelector(".calculator__keys");
+    this.display = this.calculator.querySelector(".calculator__display");
+  }
 
-// get the calculator keys from the calculator element
-const keys = calculator.querySelector(".calculator__keys");
-const display = calculator.querySelector(".calculator__display");
+  build() {
+    // add an event listener to the calculator element
+    this.keys.addEventListener("click", (e) => {
+      if (e.target.matches("button")) {
+        //calculator button clicked. Perform action
+        this.buttonClicked(e.target);
+      }
+    });
+  }
 
-// add an event listener to the calculator element
-keys.addEventListener("click", (e) => {
-  if (e.target.matches("button")) {
-    // Do something if a button is pressed
+  clearInput(key) {
+    if (key.textContent === "AC") {
+      // reset all stored values
+      this.calculator.dataset.firstValue = "";
+      this.calculator.dataset.modValue = "";
+      this.calculator.dataset.operator = "";
+      this.calculator.dataset.previousKeyType = "";
+    } else {
+      // change "CE" (clear current) to "AC" (clear all stored)
+      key.textContent = "AC";
+    }
 
-    // get the sub-element where the key-click occurred
-    const key = e.target;
+    this.display.textContent = 0;
+    this.calculator.dataset.previousKeyType = "clear";
+  }
 
-    // get the data-action value of the sub-element (if there is one)
-    const action = key.dataset.action;
+  buttonClicked(target) {
+    // get the button clicked
+    const key = target;
 
-    // get the text value of the sub-element where the key-click occurred
-    const keyContent = key.textContent;
-
-    // get the text value of the display element
-    const displayedNum = display.textContent;
-
+    // remove all "depressed" class from button elements
     Array.from(key.parentNode.children).forEach((k) =>
       k.classList.remove("is-depressed")
     );
 
-    const previousKeyType = calculator.dataset.previousKeyType;
+    // get the data-action value of the button (if there is one)
+    const action = key.dataset.action;
 
+    // get the value of the button clicked
+    const keyContent = key.textContent;
+
+    // get the value of the display element
+    const displayedNum = this.display.textContent;
+
+    // get the type of the previous button clicked
+    const previousKeyType = this.calculator.dataset.previousKeyType;
+
+    // if button clicked is a numeral 0 - 9
     if (!action) {
-      if (
-        displayedNum === "0" ||
-        previousKeyType === "operator" ||
-        previousKeyType === "calculate"
-      ) {
-        display.textContent = keyContent;
-      } else {
-        display.textContent = displayedNum + keyContent;
-      }
-      calculator.dataset.previousKeyType = "number";
+      this.numberInput(keyContent, displayedNum, previousKeyType);
     }
 
+    // if button clicked is a decimal point
     if (action === "decimal") {
-      if (!displayedNum.includes(".")) {
-        display.textContent = displayedNum + ".";
-      } else if (
-        previousKeyType === "operator" ||
-        previousKeyType === "calculate"
-      ) {
-        display.textContent = "0.";
-      }
-
-      calculator.dataset.previousKeyType = "decimal";
+      this.decimalInput(displayedNum, previousKeyType);
     }
 
+    // if button clicked is an operator (plus / minus / multiply / divide)
     if (
       action === "add" ||
       action === "subtract" ||
       action === "multiply" ||
       action === "divide"
     ) {
-      // operator key pressed
-
-      const firstValue = calculator.dataset.firstValue;
-      const operator = calculator.dataset.operator;
-      const secondValue = displayedNum;
-
-      if (
-        firstValue &&
-        operator &&
-        previousKeyType !== "operator" &&
-        previousKeyType !== "calculate"
-      ) {
-        const calcValue = calculate(firstValue, operator, secondValue);
-        display.textContent = calcValue;
-        calculator.dataset.firstValue = calcValue;
-      } else {
-        calculator.dataset.firstValue = displayedNum;
-      }
+      this.operatorInput(displayedNum, previousKeyType, action);
 
       key.classList.add("is-depressed");
-      calculator.dataset.previousKeyType = "operator";
-      calculator.dataset.operator = action;
     }
 
+    // if button clicked is clear
     if (action === "clear") {
-      if (key.textContent === "AC") {
-        calculator.dataset.firstValue = "";
-        calculator.dataset.modValue = "";
-        calculator.dataset.operator = "";
-        calculator.dataset.previousKeyType = "";
-      } else {
-        key.textContent = "AC";
-      }
-
-      display.textContent = 0;
-      calculator.dataset.previousKeyType = "clear";
+      this.clearInput(key);
     }
 
+    // if button clicked is not clear, change "AC" to "CE"
     if (action !== "clear") {
-      const clearButton = calculator.querySelector("[data-action=clear]");
+      const clearButton = this.calculator.querySelector("[data-action=clear]");
       clearButton.textContent = "CE";
     }
 
+    // if button clicked is equals, perform calculation
     if (action === "calculate") {
-      // equals key pressed, calculate first & second values with operator
-
-      let firstValue = calculator.dataset.firstValue;
-      const operator = calculator.dataset.operator;
-      const secondValue = displayedNum;
-
-      if (firstValue) {
-        if (previousKeyType === "calculate") {
-          firstValue = displayedNum;
-          secondValue = calculator.dataset.modValue;
-        }
-
-        display.textContent = calculate(firstValue, operator, secondValue);
-      }
-
-      // Set modValue attribute
-      calculator.dataset.modValue = secondValue;
-      calculator.dataset.previousKeyType = "calculate";
+      this.equalsInput(displayedNum, previousKeyType);
     }
   }
-});
 
-const calculate = (n1, operator, n2) => {
-  let result = "";
-
-  if (operator === "add") {
-    result = parseFloat(n1) + parseFloat(n2);
-  } else if (operator === "subtract") {
-    result = parseFloat(n1) - parseFloat(n2);
-  } else if (operator === "multiply") {
-    result = parseFloat(n1) * parseFloat(n2);
-  } else if (operator === "divide") {
-    result = parseFloat(n1) / parseFloat(n2);
+  numberInput(keyContent, displayedNum, previousKeyType) {
+    if (
+      displayedNum === "0" ||
+      previousKeyType === "operator" ||
+      previousKeyType === "calculate"
+    ) {
+      // display button value directly if it is the first number (i.e. display is zero)
+      // or the previous button clicked was an operator or equals
+      this.display.textContent = keyContent;
+    } else {
+      // concatenate the button value onto the displayed number string
+      this.display.textContent = displayedNum + keyContent;
+    }
+    this.calculator.dataset.previousKeyType = "number";
   }
 
-  return result;
-};
+  decimalInput(displayedNum, previousKeyType) {
+    if (!displayedNum.includes(".")) {
+      // only add a decimal point to the display string if it hasn't been added already
+      this.display.textContent = displayedNum + ".";
+    } else if (
+      previousKeyType === "operator" ||
+      previousKeyType === "calculate"
+    ) {
+      // display "0." if the previous button clicked wasn't a number
+      this.display.textContent = "0.";
+    }
+    this.calculator.dataset.previousKeyType = "decimal";
+  }
+
+  operatorInput(displayedNum, previousKeyType, action) {
+    const firstValue = this.calculator.dataset.firstValue;
+    const operator = this.calculator.dataset.operator;
+    const secondValue = displayedNum;
+
+    if (
+      firstValue &&
+      operator &&
+      previousKeyType !== "operator" &&
+      previousKeyType !== "calculate"
+    ) {
+      // perform a calculation if a previous value and operator exist
+      const calcValue = this.calculate(firstValue, operator, secondValue);
+
+      // display the calculation result
+      this.display.textContent = calcValue;
+
+      // set the previous value to the calculation result
+      this.calculator.dataset.firstValue = calcValue;
+    } else {
+      this.calculator.dataset.firstValue = displayedNum;
+    }
+
+    this.calculator.dataset.previousKeyType = "operator";
+    this.calculator.dataset.operator = action;
+  }
+
+  equalsInput(displayedNum, previousKeyType) {
+    let firstValue = this.calculator.dataset.firstValue;
+    const operator = this.calculator.dataset.operator;
+    let secondValue = displayedNum;
+
+    if (firstValue) {
+      if (previousKeyType === "calculate") {
+        firstValue = displayedNum;
+        secondValue = this.calculator.dataset.modValue;
+      }
+
+      this.display.textContent = this.calculate(
+        firstValue,
+        operator,
+        secondValue
+      );
+    }
+
+    // Set modValue attribute
+    this.calculator.dataset.modValue = secondValue;
+    this.calculator.dataset.previousKeyType = "calculate";
+  }
+
+  calculate(n1, operator, n2) {
+    switch (operator) {
+      case "add":
+        return parseFloat(n1) + parseFloat(n2);
+      case "subtract":
+        return parseFloat(n1) - parseFloat(n2);
+      case "multiply":
+        return parseFloat(n1) * parseFloat(n2);
+      case "divide":
+        return parseFloat(n1) / parseFloat(n2);
+      default:
+        console.log("Calculate failed");
+    }
+  }
+}
+
+myCalculator = new Calculator();
+
+myCalculator.build();
