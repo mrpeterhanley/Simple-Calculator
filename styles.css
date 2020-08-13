@@ -120,7 +120,7 @@ body {
 }
 
 .container {
-  /* max-width: 20em; */
+  max-width: 20em;
 }
 
 .container > p {
@@ -163,8 +163,8 @@ body {
 .calculator__keys > * {
   color: white;
   background-color: #505050;
-  padding: 0.5em; /* 1.25em;
-  /* position: relative; */
+  padding: 0.5em;
+  position: relative;
   text-align: center;
 }
 
