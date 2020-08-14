@@ -130,11 +130,6 @@ body {
 .calculator {
   border-radius: 5%;
   box-shadow: 0 0 40px 0px rgba(0, 0, 0, 0.15);
-  /* margin-left: auto;
-  margin-right: auto; */
-  /* margin-top: 2em; */
-  /* max-width: 15em;
-  overflow: hidden; */
   width: 338px;
   height: 600px;
   display: flex;
@@ -167,8 +162,7 @@ body {
   text-align: center;
 }
 
-.calculator__keys > *:active::before,
-.calculator__keys > .is-depressed::before {
+.calculator__keys > *:active::before {
   background-color: rgba(0, 0, 0, 0.2);
   bottom: 0;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5) inset;
