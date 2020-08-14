@@ -14,5 +14,5 @@ The calculator temporarily stores these values as “dataset” attributes in th
 When a button is pressed, the calculator will then run a function based on the value and type of button and what previous stored values already exist:
 1.	numberInput(): displays the number pressed on the screen
 2.	decimalInput(): displays a decimal on the screen only if it does not exist already
-3.	operatorInput(): stores the operator, and performs a calculation and displays it if a previously two previous values (n1 and n2) and an operator already exist (for chained calculations)
+3.	operatorInput(): stores the operator, and performs a calculation and displays it if two previous values (n1 and n2) and an operator already exist (for chained calculations)
 4.	equalsInput(): performs a calculation and displays it only if two previous values (n1 and n2) and an operator already exist
