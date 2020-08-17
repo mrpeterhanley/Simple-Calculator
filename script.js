@@ -1,8 +1,8 @@
 class Calculator {
   constructor() {
-    this.calculator = document.querySelector(".calculator");
-    this.keys = this.calculator.querySelector(".calculator__keys");
-    this.display = this.calculator.querySelector(".calculator__display");
+    // this.calculator = document.querySelector(".calculator");
+    // this.keys = this.calculator.querySelector(".calculator__keys");
+    // this.display = this.calculator.querySelector(".calculator__display");
   }
 
   build() {
@@ -19,7 +19,6 @@ class Calculator {
     if (key.textContent === "AC") {
       // "AC" was clicked, clear all stored values
       this.calculator.dataset.firstValue = "";
-      this.calculator.dataset.modValue = "";
       this.calculator.dataset.operator = "";
       this.calculator.dataset.previousKeyType = "";
     } else {
@@ -191,6 +190,6 @@ class Calculator {
   }
 }
 
-myCalculator = new Calculator();
+// myCalculator = new Calculator();
 
-myCalculator.build();
+// myCalculator.build();
