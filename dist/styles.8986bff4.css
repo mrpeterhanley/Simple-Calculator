@@ -12,64 +12,6 @@ body {
   margin: 0;
 }
 
-/* Responsive Images */
-embed,
-iframe,
-img,
-object,
-video {
-  max-width: 100%;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ul,
-ol,
-li,
-p,
-pre,
-blockquote,
-figure,
-hr {
-  margin: 0;
-  padding-right: 0;
-  padding-left: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:focus {
-  outline: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  display: block;
-}
-
-/* Removes all decimals and discs from lists */
-ol,
-ul {
-  list-style: none;
-}
-
-/* 
-   * Completely resets form items
-   * ----------------------------
-   * Super hard reset that removes all borders
-   * and radiuses of all form items (including
-   * checkboxes and radios)
-   */
 input,
 textarea,
 button {
@@ -92,8 +34,7 @@ textarea:focus,
 button:hover,
 button:active,
 button:focus {
-  outline: none;
-  opacity: 85% !important;
+  opacity: 0.8;
 }
 
 :root {
