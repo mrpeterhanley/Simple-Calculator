@@ -132,12 +132,12 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Calculator = /*#__PURE__*/function () {
-  function Calculator() {
+  function Calculator(calcContainer, keys, display) {
     _classCallCheck(this, Calculator);
 
-    this.calculator = document.querySelector(".calculator");
-    this.keys = this.calculator.querySelector(".calculator__keys");
-    this.display = this.calculator.querySelector(".calculator__display");
+    this.calculator = calcContainer;
+    this.keys = keys;
+    this.display = display;
   }
 
   _createClass(Calculator, [{
@@ -341,7 +341,10 @@ var _calculator = _interopRequireDefault(require("./calculator.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var myCalculator = new _calculator.default();
+var calcContainer = document.querySelector(".calculator");
+var keys = (void 0).calculator.querySelector(".calculator__keys");
+var display = (void 0).calculator.querySelector(".calculator__display");
+var myCalculator = new _calculator.default(calcContainer, keys, display);
 myCalculator.build();
 },{"./calculator.js":"calculator.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -371,7 +374,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6310" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6909" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

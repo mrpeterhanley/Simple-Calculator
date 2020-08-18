@@ -1,11 +1,11 @@
 export default class Calculator {
-  constructor() {
-    this.calculator = document.querySelector(".calculator");
-    this.keys = this.calculator.querySelector(".calculator__keys");
-    this.display = this.calculator.querySelector(".calculator__display");
+  constructor(calculator, keys, display) {
+    this.calculator = calculator;
+    this.keys = keys;
+    this.display = display;
   }
 
-  build() {
+  turnOn() {
     // add an event listener to the calculator element
     this.keys.addEventListener("click", (e) => {
       if (e.target.matches("button")) {
