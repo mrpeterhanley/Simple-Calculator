@@ -94,7 +94,7 @@ button:hover,
 button:active,
 button:focus {
   /* outline: none; */
-  opacity: 85%;
+  /* opacity: 85%; */
 }
 
 :root {
