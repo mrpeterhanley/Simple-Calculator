@@ -132,17 +132,17 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var Calculator = /*#__PURE__*/function () {
-  function Calculator(calcContainer, keys, display) {
+  function Calculator(calculator, keys, display) {
     _classCallCheck(this, Calculator);
 
-    this.calculator = calcContainer;
+    this.calculator = calculator;
     this.keys = keys;
     this.display = display;
   }
 
   _createClass(Calculator, [{
-    key: "build",
-    value: function build() {
+    key: "turnOn",
+    value: function turnOn() {
       var _this = this;
 
       // add an event listener to the calculator element
@@ -341,11 +341,11 @@ var _calculator = _interopRequireDefault(require("./calculator.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var calcContainer = document.querySelector(".calculator");
-var keys = (void 0).calculator.querySelector(".calculator__keys");
-var display = (void 0).calculator.querySelector(".calculator__display");
-var myCalculator = new _calculator.default(calcContainer, keys, display);
-myCalculator.build();
+var calculator = document.querySelector(".calculator");
+var keys = calculator.querySelector(".calculator__keys");
+var display = calculator.querySelector(".calculator__display");
+var myCalculator = new _calculator.default(calculator, keys, display);
+myCalculator.turnOn();
 },{"./calculator.js":"calculator.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -374,7 +374,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "6909" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8489" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
