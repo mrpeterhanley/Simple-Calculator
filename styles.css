@@ -80,8 +80,6 @@ button {
   font-family: inherit;
   font-weight: inherit;
   outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
   text-align: center;
 }
@@ -95,7 +93,7 @@ textarea:focus,
 button:hover,
 button:active,
 button:focus {
-  outline: none;
+  /* outline: none; */
   opacity: 85%;
 }
 
