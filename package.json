@@ -1,0 +1,31 @@
+{
+  "name": "simple-calculator",
+  "version": "1.0.0",
+  "description": "Simple-Calculator is based on the tutorial by Zell Liew on freeCodeCamp:\r https://www.freecodecamp.org/news/how-to-build-an-html-calculator-app-from-scratch-using-javascript-4454b8714b98/",
+  "main": "index.js",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.0"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrpeterhanley/Simple-Calculator.git"
+  },
+  "author": "Peter Hanley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrpeterhanley/Simple-Calculator/issues"
+  },
+  "homepage": "https://github.com/mrpeterhanley/Simple-Calculator#readme",
+  "keywords": []
+}

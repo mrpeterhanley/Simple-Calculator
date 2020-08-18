@@ -1,8 +1,8 @@
-class Calculator {
+export default class Calculator {
   constructor() {
-    // this.calculator = document.querySelector(".calculator");
-    // this.keys = this.calculator.querySelector(".calculator__keys");
-    // this.display = this.calculator.querySelector(".calculator__display");
+    this.calculator = document.querySelector(".calculator");
+    this.keys = this.calculator.querySelector(".calculator__keys");
+    this.display = this.calculator.querySelector(".calculator__display");
   }
 
   build() {
@@ -13,21 +13,6 @@ class Calculator {
         this.buttonClicked(e.target);
       }
     });
-  }
-
-  clearInput(key) {
-    if (key.textContent === "AC") {
-      // "AC" was clicked, clear all stored values
-      this.calculator.dataset.firstValue = "";
-      this.calculator.dataset.operator = "";
-      this.calculator.dataset.previousKeyType = "";
-    } else {
-      // change "CE" (clear current) to "AC" (clear all stored)
-      key.textContent = "AC";
-    }
-    // clear the current display ("CE")
-    this.display.textContent = 0;
-    this.calculator.dataset.previousKeyType = "clear";
   }
 
   buttonClicked(target) {
@@ -49,6 +34,22 @@ class Calculator {
     // perform action if button clicked is a numeral 0 - 9
     if (!action) {
       this.numberInput(keyContent, displayedNum, previousKeyType);
+    }
+
+    // perform action negative / positive toggle if clicked
+    if (action === "negative") {
+      // if displayed number is negative, change to positive
+      if (displayedNum < 0) {
+        this.display.textContent = Math.abs(displayedNum);
+      } else {
+        // if displayed number is positive, change to negative
+        this.display.textContent = -Math.abs(displayedNum);
+      }
+    }
+
+    // change number to percentage if percentage button is clicked
+    if (action === "percentage") {
+      this.display.textContent = displayedNum * 0.01;
     }
 
     // perform action if button clicked is a decimal point
@@ -146,6 +147,22 @@ class Calculator {
     this.calculator.dataset.operator = action;
   }
 
+  // function that deals with the click of the clear (AC / CE) button
+  clearInput(key) {
+    if (key.textContent === "AC") {
+      // "AC" was clicked, clear all stored values
+      this.calculator.dataset.firstValue = "";
+      this.calculator.dataset.operator = "";
+      this.calculator.dataset.previousKeyType = "";
+    } else {
+      // change "CE" (clear current) to "AC" (clear all stored)
+      key.textContent = "AC";
+    }
+    // clear the current display ("CE")
+    this.display.textContent = 0;
+    this.calculator.dataset.previousKeyType = "clear";
+  }
+
   // function that deals with the click of the equals (=) button
   equalsInput(displayedNum, previousKeyType) {
     let firstValue = this.calculator.dataset.firstValue;
@@ -185,11 +202,7 @@ class Calculator {
       case "divide":
         return firstNum / secondNum;
       default:
-        console.log("Calculate failed");
+      // throw new Error("Invalid operator");
     }
   }
 }
-
-// myCalculator = new Calculator();
-
-// myCalculator.build();

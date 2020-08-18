@@ -13,8 +13,10 @@
 
         <div class="calculator__keys">
           <button class="key--firstrow" data-action="clear">AC</button>
-          <button class="key--firstrow" disabled>+/-</button>
-          <button class="key--firstrow" disabled>%</button>
+          <button class="key--firstrow" data-action="negative">
+            +/-
+          </button>
+          <button class="key--firstrow" data-action="percentage">%</button>
           <button class="key--operator" data-action="divide">÷</button>
           <button>7</button>
           <button>8</button>
@@ -34,6 +36,6 @@
         </div>
       </div>
     </div>
-    <script src="./script.js"></script>
+    <script src="./index.js"></script>
   </body>
 </html>
