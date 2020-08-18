@@ -93,8 +93,8 @@ textarea:focus,
 button:hover,
 button:active,
 button:focus {
-  /* outline: none; */
-  /* opacity: 85%; */
+  outline: none;
+  opacity: 85%;
 }
 
 :root {
