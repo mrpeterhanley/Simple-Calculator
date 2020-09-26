@@ -25,6 +25,10 @@ button {
   text-align: center;
 }
 
+.key--zero {
+  border-radius: 2rem;
+}
+
 input:hover,
 input:active,
 input:focus,
@@ -51,6 +55,7 @@ body {
   align-items: center;
   background-image: linear-gradient(236deg, #74ebd5, #acb6e5);
   display: flex;
+  flex-direction: column;
   height: 100vh;
   justify-content: center;
 }
@@ -60,7 +65,7 @@ body {
 }
 
 .calculator {
-  border-radius: 8%;
+  border-radius: 2rem;
   box-shadow: 0 0 40px 0px rgba(0, 0, 0, 0.15);
   display: flex;
   justify-content: center;
@@ -118,4 +123,10 @@ body {
 .key--firstrow {
   background-color: #d4d4d2;
   color: black;
+}
+
+footer {
+  margin: 20px;
+  font-size: 0.55rem;
+  color: white;
 }
